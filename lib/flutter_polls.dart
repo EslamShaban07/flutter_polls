@@ -33,7 +33,7 @@ class FlutterPolls extends HookWidget {
     this.pollOptionsSplashColor = Colors.grey,
     this.pollOptionsBorder,
     this.votedPollOptionsBorder,
-    this.votedPollOptionsRadius,
+    this.votedBorderRadius,
     this.votedBackgroundColor = const Color(0xffEEF0EB),
     this.votedProgressColor = const Color(0xff84D2F6),
     this.leadingVotedProgessColor = const Color(0xff0496FF),
@@ -180,8 +180,7 @@ class FlutterPolls extends HookWidget {
 
   /// Radius of the border of a [PollOption] when the user has voted.
   /// Defaults to Radius.circular(8).
-  final Radius? votedPollOptionsRadius;
-
+  final BorderRadius? votedBorderRadius;
   /// Color of the background of a [PollOption] when the user has voted.
   /// Defaults to [const Color(0xffEEF0EB)].
   final Color? votedBackgroundColor;
@@ -261,17 +260,14 @@ class FlutterPolls extends HookWidget {
                           decoration: votedPollOptionsBorder != null
                               ? BoxDecoration(
                                   border: votedPollOptionsBorder,
-                                  borderRadius: BorderRadius.all(
-                                    votedPollOptionsRadius ??
-                                        const Radius.circular(8),
-                                  ),
+                                  borderRadius:votedBorderRadius??BorderRadius.zero
                                 )
                               : null,
                           child: LinearPercentIndicator(
                             width: pollOptionsWidth,
                             lineHeight: pollOptionsHeight!,
-                            barRadius: votedPollOptionsRadius ??
-                                const Radius.circular(8),
+                            barRadius: votedBorderRadius ??
+                                 BorderRadius.circular(8),
                             padding: EdgeInsets.zero,
                             percent: totalVotes.value == 0
                                 ? 0
